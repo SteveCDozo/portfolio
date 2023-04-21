@@ -1,81 +1,88 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import "../styles/style.css";
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-	</main>
-</Layout>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Steve Cardozo</title>
+  </head>
+  <body>
+    <header>
+      <a href="/" class="logo">sc</a>
+      <nav>
+        <button
+          class="mobile-nav-toggle"
+          aria-expanded="false"
+          aria-controls="nav-menu"
+        >
+        </button>
+        <ul id="nav-menu">
+          <li><a href="#about">about</a></li>
+          <li><a href="#projects">projects</a></li>
+          <li><a href="#contact">contact</a></li>
+          <li><a href="#" target="_blank" class="resume-link">resume</a></li>
+        </ul>
+      </nav>
+    </header>
 
-<style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
-</style>
+    <main>
+      <section id="hero">
+        <div>
+          <p>hi there! i'm</p>
+          <h1>Steve Cardozo,</h1>
+          <h2>
+            a <b>front-end developer</b> who loves bringing ideas to life.
+          </h2>
+        </div>
+        <!--<img src="/images/cat.png" />-->
+      </section>
+      <section id="about">about</section>
+      <section id="projects">projects</section>
+    </main>
+
+    <script>
+      import Headroom from "headroom.js";
+
+      const header = document.querySelector("header");
+      const navToggle = document.querySelector(".mobile-nav-toggle");
+      const navMenu = document.querySelector("#nav-menu");
+
+      function openNavMenu() {
+        navToggle.setAttribute("aria-expanded", "true");
+        navMenu.classList.add("is-active");
+      }
+
+      function closeNavMenu() {
+        navToggle.setAttribute("aria-expanded", "false");
+        navMenu.classList.remove("is-active");
+      }
+
+      function isNavMenuOpen() {
+        return navMenu.classList.contains("is-active");
+      }
+
+      navToggle.addEventListener("click", () =>
+        isNavMenuOpen() ? closeNavMenu() : openNavMenu()
+      );
+
+      // close the mobile nav menu when link is clicked
+      navMenu.addEventListener("click", e => {
+        if (!isNavMenuOpen() || e.target.tagName !== "A") return; // ensure menu open and link clicked
+
+        closeNavMenu();
+      });
+
+      const options = { onUnpin: () => isNavMenuOpen() && closeNavMenu() };
+      const headroom = new Headroom(header, options);
+      headroom.init();
+    </script>
+  </body>
+</html>

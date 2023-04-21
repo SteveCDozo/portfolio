@@ -7,9 +7,20 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.{js,astro}": "eslint"
   },
   "dependencies": {
-    "astro": "^2.2.3"
+    "astro": "^2.2.3",
+    "headroom.js": "^0.12.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.38.0",
+    "eslint-plugin-astro": "^0.26.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1"
   }
 }
